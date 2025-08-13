@@ -1,0 +1,125 @@
+11:58:46 AM:DEBUG [conexion.py:24] Conexión exitosa: <connection object at 0x7fe8cc8007c0; dsn: 'user=postgres password=xxx dbname=test_db host=127.0.0.1 port=5432', closed: 0>
+11:58:46 AM:DEBUG [conexion.py:37] Se abrió correctamente el cursor: <cursor object at 0x7fe8cc79d6c0; closed: 0>
+11:59:14 AM:DEBUG [conexion.py:24] Conexión exitosa: <connection object at 0x71d542be07c0; dsn: 'user=postgres password=xxx dbname=test_db host=127.0.0.1 port=5432', closed: 0>
+11:59:14 AM:DEBUG [conexion.py:37] Se abrió correctamente el cursor: <cursor object at 0x71d542b7d6c0; closed: 0>
+11:59:14 AM:INFO [menu_app_usuario.py:21] 
+        ID usuario: 1
+        Nombre: jperez                                                                                              
+        Apellido: 123                                                                                                 
+        
+11:59:14 AM:INFO [menu_app_usuario.py:21] 
+        ID usuario: 2
+        Nombre: kgomez                                                                                              
+        Apellido: 456                                                                                                 
+        
+12:00:37 PM:DEBUG [conexion.py:24] Conexión exitosa: <connection object at 0x7220953207c0; dsn: 'user=postgres password=xxx dbname=test_db host=127.0.0.1 port=5432', closed: 0>
+12:00:37 PM:DEBUG [conexion.py:37] Se abrió correctamente el cursor: <cursor object at 0x72209529d6c0; closed: 0>
+12:00:37 PM:INFO [menu_app_usuario.py:21] 
+        ID usuario: 1
+        Nombre: jperez                                                                                              
+        Apellido: 123                                                                                                 
+        
+12:00:37 PM:INFO [menu_app_usuario.py:21] 
+        ID usuario: 2
+        Nombre: kgomez                                                                                              
+        Apellido: 456                                                                                                 
+        
+12:00:57 PM:INFO [menu_app_usuario.py:60] Saliendo de la aplicación
+12:04:17 PM:DEBUG [conexion.py:24] Conexión exitosa: <connection object at 0x705e5e6211c0; dsn: 'user=postgres password=xxx dbname=test_dos_db host=127.0.0.1 port=5432', closed: 0>
+12:04:17 PM:DEBUG [conexion.py:37] Se abrió correctamente el cursor: <cursor object at 0x705e5e5b96c0; closed: 0>
+12:04:33 PM:DEBUG [conexion.py:24] Conexión exitosa: <connection object at 0x7115206207c0; dsn: 'user=postgres password=xxx dbname=test_dos_db host=127.0.0.1 port=5432', closed: 0>
+12:04:33 PM:DEBUG [conexion.py:37] Se abrió correctamente el cursor: <cursor object at 0x71152059d6c0; closed: 0>
+12:04:48 PM:DEBUG [conexion.py:24] Conexión exitosa: <connection object at 0x7a4f86c207c0; dsn: 'user=postgres password=xxx dbname=test_dos_db host=127.0.0.1 port=5432', closed: 0>
+12:04:48 PM:DEBUG [conexion.py:37] Se abrió correctamente el cursor: <cursor object at 0x7a4f86b9d6c0; closed: 0>
+12:05:00 PM:INFO [menu_app_usuario.py:60] Saliendo de la aplicación
+02:41:38 PM:DEBUG [conexion.py:24] Conexión exitosa: <connection object at 0x7723ef6207c0; dsn: 'user=postgres password=xxx dbname=test_dos_db host=127.0.0.1 port=5432', closed: 0>
+02:41:38 PM:DEBUG [conexion.py:37] Se abrió correctamente el cursor: <cursor object at 0x7723ef5b96c0; closed: 0>
+02:44:38 PM:DEBUG [conexion.py:24] Conexión exitosa: <connection object at 0x766ced2007c0; dsn: 'user=postgres password=xxx dbname=test_dos_db host=127.0.0.1 port=5432', closed: 0>
+02:44:38 PM:DEBUG [conexion.py:37] Se abrió correctamente el cursor: <cursor object at 0x766ced19d6c0; closed: 0>
+02:47:49 PM:DEBUG [conexion.py:24] Conexión exitosa: <connection object at 0x7c1856ac47c0; dsn: 'user=postgres password=xxx dbname=test_dos_db host=127.0.0.1 port=5432', closed: 0>
+02:47:49 PM:DEBUG [conexion.py:37] Se abrió correctamente el cursor: <cursor object at 0x7c1856a456c0; closed: 0>
+02:48:13 PM:DEBUG [conexion.py:24] Conexión exitosa: <connection object at 0x7246d38007c0; dsn: 'user=postgres password=xxx dbname=test_dos_db host=127.0.0.1 port=5432', closed: 0>
+02:48:13 PM:DEBUG [conexion.py:37] Se abrió correctamente el cursor: <cursor object at 0x7246d37816c0; closed: 0>
+02:48:16 PM:INFO [menu_app_usuario.py:60] Saliendo de la aplicación
+02:49:32 PM:DEBUG [conexion.py:25] Conexión exitosa: <connection object at 0x7e2aaacf2480; dsn: 'user=postgres password=xxx dbname=test_dos_db host=127.0.0.1 port=5432 options='-c client_encoding=utf8'', closed: 0>
+02:49:32 PM:DEBUG [conexion.py:36] Se abrió correctamente el cursor: <cursor object at 0x7e2aaabb98a0; closed: 0>
+02:49:39 PM:DEBUG [conexion.py:36] Se abrió correctamente el cursor: <cursor object at 0x7e2aaabb98a0; closed: 0>
+02:49:39 PM:DEBUG [usuario_dao.py:34] Usuario Insertado: 
+        ID usuario: 1
+        Nombre: joaquin
+        Contraseña: 123
+        
+02:49:39 PM:INFO [menu_app_usuario.py:31] Usuario Insertado: 1
+02:49:41 PM:DEBUG [conexion.py:36] Se abrió correctamente el cursor: <cursor object at 0x7e2aaabb98a0; closed: 0>
+02:49:41 PM:INFO [menu_app_usuario.py:21] 
+        ID usuario: 1
+        Nombre: joaquin
+        Contraseña: 123
+        
+02:49:52 PM:DEBUG [conexion.py:36] Se abrió correctamente el cursor: <cursor object at 0x7e2aaabb98a0; closed: 0>
+02:53:54 PM:DEBUG [conexion.py:25] Conexión exitosa: <connection object at 0x7f7b40c3e480; dsn: 'user=postgres password=xxx dbname=test_dos_db host=127.0.0.1 port=5432 options='-c client_encoding=utf8'', closed: 0>
+02:53:54 PM:DEBUG [conexion.py:36] Se abrió correctamente el cursor: <cursor object at 0x7f7b40b098a0; closed: 0>
+02:53:54 PM:INFO [menu_app_usuario.py:21] 
+        ID usuario: 1
+        Nombre: joaquin
+        Contraseña: 123
+        
+02:54:04 PM:DEBUG [conexion.py:36] Se abrió correctamente el cursor: <cursor object at 0x7f7b40b098a0; closed: 0>
+02:54:04 PM:DEBUG [usuario_dao.py:34] Usuario Insertado: 
+        ID usuario: 2
+        Nombre: mica
+        Contraseña: 1234
+        
+02:54:04 PM:INFO [menu_app_usuario.py:31] Usuario Insertado: 1
+02:54:15 PM:DEBUG [conexion.py:36] Se abrió correctamente el cursor: <cursor object at 0x7f7b40b098a0; closed: 0>
+02:54:15 PM:DEBUG [usuario_dao.py:43] Usuario Actualizado 
+        ID usuario: 2
+        Nombre: morena
+        Contraseña: 1234
+        
+02:54:15 PM:INFO [menu_app_usuario.py:44] Usuario Actualizado: 1
+02:54:16 PM:DEBUG [conexion.py:36] Se abrió correctamente el cursor: <cursor object at 0x7f7b40b098a0; closed: 0>
+02:54:16 PM:INFO [menu_app_usuario.py:21] 
+        ID usuario: 1
+        Nombre: joaquin
+        Contraseña: 123
+        
+02:54:16 PM:INFO [menu_app_usuario.py:21] 
+        ID usuario: 2
+        Nombre: morena
+        Contraseña: 1234
+        
+02:54:23 PM:DEBUG [conexion.py:36] Se abrió correctamente el cursor: <cursor object at 0x7f7b40b098a0; closed: 0>
+02:54:23 PM:DEBUG [usuario_dao.py:52] Los objetos eliminados son 
+        ID usuario: 3
+        Nombre: None
+        Contraseña: None
+        
+02:54:23 PM:INFO [menu_app_usuario.py:54] Usuario Eliminado: 0
+02:54:25 PM:INFO [menu_app_usuario.py:60] Saliendo de la aplicación
+02:54:30 PM:DEBUG [conexion.py:25] Conexión exitosa: <connection object at 0x7d1d3fed2480; dsn: 'user=postgres password=xxx dbname=test_dos_db host=127.0.0.1 port=5432 options='-c client_encoding=utf8'', closed: 0>
+02:54:30 PM:DEBUG [conexion.py:36] Se abrió correctamente el cursor: <cursor object at 0x7d1d3fd818a0; closed: 0>
+02:54:30 PM:INFO [menu_app_usuario.py:21] 
+        ID usuario: 1
+        Nombre: joaquin
+        Contraseña: 123
+        
+02:54:30 PM:INFO [menu_app_usuario.py:21] 
+        ID usuario: 2
+        Nombre: morena
+        Contraseña: 1234
+        
+02:54:34 PM:DEBUG [conexion.py:36] Se abrió correctamente el cursor: <cursor object at 0x7d1d3fd818a0; closed: 0>
+02:54:34 PM:DEBUG [usuario_dao.py:52] Los objetos eliminados son 
+        ID usuario: 2
+        Nombre: None
+        Contraseña: None
+        
+02:54:34 PM:INFO [menu_app_usuario.py:54] Usuario Eliminado: 1
+02:54:42 PM:DEBUG [conexion.py:36] Se abrió correctamente el cursor: <cursor object at 0x7d1d3fd818a0; closed: 0>
+02:54:42 PM:INFO [menu_app_usuario.py:21] 
+        ID usuario: 1
+        Nombre: joaquin
+        Contraseña: 123
+        
+02:54:46 PM:INFO [menu_app_usuario.py:60] Saliendo de la aplicación
