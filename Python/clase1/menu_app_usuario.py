@@ -36,8 +36,8 @@ while opcion != 5:
         elif opcion == 3:
             try:
                 id_usuario_var = int(input('Digite el ID del usuario a modificar: '))
-                username_var = input('Digite el nombre del usuario a modificar: ')
-                password_var = input('Digite la contraseña del usuario a modificar: ')
+                username_var = input('Digite el nuevo nombre del usuario: ')
+                password_var = input('Digite la nueva contraseña del usuario: ')
 
                 usuario = Usuario(id_usuario=id_usuario_var, username=username_var, password=password_var)
                 usuario_actualizado = UsuarioDAO.actualizar(usuario)
