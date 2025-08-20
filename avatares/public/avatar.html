@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/css/avatares.css">
+    <script defer src="../public/js/avatar.js"></script>
+    <title>La Leyenda de Aang: Avatar</title>
+</head>
+<body>
+    <h1>Avatar</h1>
+    <section id="reglas-juego" class="oculto">
+        <h2>Reglas del Juego</h2>
+        <p>1. Primero, selecciona un personaje para comenzar a jugar.</p>
+        <p>2. Tú y el enemigo comienzan con <strong>3 vidas</strong> cada uno.</p>
+        <p>3. Los ataques funcionan como piedra, papel o tijera:</p>
+        <ul>
+            <li><strong>Patada</strong> 🦶 vence a <strong>Puño</strong> 🧪</li>
+            <li><strong>Puño</strong> 🧪 vence a <strong>Barrida</strong> 💨</li>
+            <li><strong>Barrida</strong> 💨 vence a <strong>Patada</strong> 🦶</li>
+        </ul>
+        <button id="boton-cerrar-reglas">Cerrar</button>
+    </section>
+
+    <button id="boton-ver-reglas">Ver Reglas</button>
+
+    <section id="seleccionar-personaje">
+        <h2>Selecciona tu personaje</h2>
+        <div class="personaje-option">
+            <input type="radio" name="personaje" id="zuko">
+            <label for="zuko">Zuko</label>
+        </div>
+        <div class="personaje-option">
+            <input type="radio" name="personaje" id="katara">
+            <label for="katara">Katara</label>
+        </div>
+        <div class="personaje-option">
+            <input type="radio" name="personaje" id="aang">
+            <label for="aang">Aang</label>
+        </div>
+        <div class="personaje-option">
+            <input type="radio" name="personaje" id="toph">
+            <label for="toph">Toph</label>
+        </div>
+        <button id="boton-personaje">Seleccionar</button>
+    </section>
+
+    <section id="seleccionar-ataque">
+        <h2>Elige tu ataque</h2>
+        <p>Tu personaje <span id="personaje-jugador"></span> tiene <span id="vidas-jugador" class="vidas">3</span> vidas</p>
+        <p>El personaje <span id="personaje-enemigo"></span> del enemigo tiene <span id="vidas-enemigo" class="vidas">3</span> vidas</p>
+        <div class="botones-ataque">
+            <button id="boton-punio">Puño 🧪</button>
+            <button id="boton-patada">Patada 🦶</button>
+            <button id="boton-barrida">Barrida 💨</button>
+        </div>
+    </section>
+
+    <section id="mensajes"></section>
+
+    <section id="boton-reiniciar">
+        <button>Reiniciar</button>
+    </section>
+</body>
+</html>
