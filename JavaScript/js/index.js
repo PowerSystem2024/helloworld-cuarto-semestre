@@ -1,28 +1,40 @@
 const shopContent = document.getElementById("shopContent");
+const cart = [];
 
 products.forEach((product) => {
-    const content = document.createElement("div");
-    content.innerHTML = `
-        <img src="${product.image}">
-        <h3>${product.productName}</h3>
-        <p>${product.price} $</p>
-    `;
-    shopContent.append(content);
+  const productCard = document.createElement("div");
 
-    const buyButton = document.createElement("button");
-    buyButton.innerText = "Comprar";
+  productCard.innerHTML = `
+    <img src="${product.img}" />
+    <h2>${product.productName}</h2>
+    <p>Precio: $${product.price}</p>
+    <p>Cantidad: ${product.quantity} U.</p>
+  `;
+  shopContent.append(productCard);
 
-    content.append(buyButton);
+  const buyButton = document.createElement("button");
+  buyButton.innerText = "Comprar";
 
-    buyButton.addEventListener("click", () => {
-        cart.push({
-            id: product.id,
-            productName: product.productName,
-            price: product.price,
-            quanty: product.quanty,
-            image: product.image,
-        })
-        console.log(cart);
-    })
+  productCard.append(buyButton);
+
+  buyButton.addEventListener("click", () => {
+    const repeat = cart.some(
+      (repeatProduct) => repeatProduct.id === product.id
+    );
+    if (repeat) {
+      cart.map((prod) => {
+        if (prod.id === product.id) {
+          prod.quantity++;
+        }
+      });
+    } else
+      cart.push({
+        id: product.id,
+        productName: product.productName,
+        price: product.price,
+        img: product.img,
+        quantity: product.quantity,
+      });
+    console.log(cart);
+  });
 });
-
