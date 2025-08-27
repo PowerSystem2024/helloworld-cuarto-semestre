@@ -43,6 +43,10 @@ function iniciarJuego() {
     seccionSeleccionAtaque.classList.add("oculto") // Ocultamos al principio
 }
 
+function actualizarVidas() {
+    document.getElementById("vidas-jugador").innerHTML = vidasJugador
+    document.getElementById("vidas-enemigo").innerHTML = vidasEnemigo
+}
 
 
 function mostrarReglas() {
@@ -128,6 +132,7 @@ function combates() {
     crearMensajeCombate("💙 Vidas restantes - Tú: " + vidasJugador + " | Enemigo: " + vidasEnemigo)
     crearMensajeCombate("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
     revisarVidas()
+    actualizarVidas()
 }
 
 function limpiarMensajes() {
