@@ -1,5 +1,4 @@
 // Variables globales
-// Variables globales
 let ataqueJugador
 let ataqueEnemigo
 let spanVidasJugador = document.getElementById('vidas-jugador')
