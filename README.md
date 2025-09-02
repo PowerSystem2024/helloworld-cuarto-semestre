@@ -38,6 +38,10 @@ Estamos convencidos de que el desarrollo de software es un camino de mejora cont
 
 📩 Podés escribirnos si querés colaborar, aprender juntos o compartir ideas:  
 > Equipo **HelloWorld!**
+> https://github.com/juanbisaguirre
+> https://github.com/joako2004
+> https://github.com/Akussu
+
 
 ---
 
