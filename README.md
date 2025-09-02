@@ -7,11 +7,9 @@ Somos un grupo de estudiantes apasionados por la tecnología y el desarrollo de 
 
 ## 👨‍💻 Integrantes
 
-- **Juan Aníbal Bisaguirre**  
-- **Joaquín Peralta**  
-- **Carlos Ariel Díaz Cattoni**
-
----
+- 👤 [Juan Aníbal Bisaguirre](https://github.com/juanbisaguirre)  
+- 👤 [Joaquín Peralta](https://github.com/joako2004)  
+- 👤 [Carlos Ariel Díaz Cattoni](https://github.com/Akussu)
 
 ## 🌟 Nuestra Misión
 
@@ -38,11 +36,9 @@ Estamos convencidos de que el desarrollo de software es un camino de mejora cont
 
 📩 Podés escribirnos si querés colaborar, aprender juntos o compartir ideas:  
 > Equipo **HelloWorld!**
-> https://github.com/juanbisaguirre
-> https://github.com/joako2004
-> https://github.com/Akussu
-
-
+- 👤 [Juan Aníbal Bisaguirre](https://github.com/juanbisaguirre)  
+- 👤 [Joaquín Peralta](https://github.com/joako2004)  
+- 👤 [Carlos Ariel Díaz Cattoni](https://github.com/Akussu)
 ---
 
 ⭐ *Gracias por visitar nuestro repositorio. ¡Este es solo el comienzo!*
