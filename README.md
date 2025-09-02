@@ -1,4 +1,4 @@
-# 👋 HelloWorl!
+# 👋 HelloWorld!
 
 Bienvenidos al repositorio oficial de **HelloWorl!** 🚀  
 Somos un grupo de estudiantes apasionados por la tecnología y el desarrollo de software, formándonos como **Futuros Técnicos Universitarios en Desarrollo de Software**.  
