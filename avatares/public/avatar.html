@@ -14,8 +14,8 @@
         <p>2. Tú y el enemigo comienzan con <strong>3 vidas</strong> cada uno.</p>
         <p>3. Los ataques funcionan como piedra, papel o tijera:</p>
         <ul>
-            <li><strong>Patada</strong> 🦶 vence a <strong>Puño</strong> 🧪</li>
-            <li><strong>Puño</strong> 🧪 vence a <strong>Barrida</strong> 💨</li>
+            <li><strong>Patada</strong> 🦶 vence a <strong>Puño</strong> 👊</li>
+            <li><strong>Puño</strong> 👊 vence a <strong>Barrida</strong> 💨</li>
             <li><strong>Barrida</strong> 💨 vence a <strong>Patada</strong> 🦶</li>
         </ul>
         <button id="boton-cerrar-reglas">Cerrar</button>
@@ -24,25 +24,37 @@
     <button id="boton-ver-reglas">Ver Reglas</button>
 
     <section id="seleccionar-personaje">
-        <h2>Selecciona tu personaje</h2>
-        <div class="personaje-option">
-            <input type="radio" name="personaje" id="zuko">
-            <label for="zuko">Zuko</label>
+        <!-- Vista de selección -->
+        <div id="vista-personajes">
+            <h2>Selecciona tu personaje</h2>
+
+            <div id="personajes-lista">
+                <!-- Personajes dinámicos -->
+            </div>
+            
+            <div class="botones-personajes">
+                <button id="boton-personaje">Seleccionar</button>
+                <button id="boton-crear-personaje">Crear Personaje</button>
+            </div>
         </div>
-        <div class="personaje-option">
-            <input type="radio" name="personaje" id="katara">
-            <label for="katara">Katara</label>
+
+       <!-- Vista de creación -->
+        <div id="vista-crear-personaje" class="oculto">
+            <h2>Crear nuevo personaje</h2>
+            <form>
+                <input type="text" id="nuevo-nombre" placeholder="Nombre del personaje">
+                <br>
+                <input type="number" id="nuevas-vidas" placeholder="Cantidad de vidas" min="1">
+                <br>
+                <div class="botones-personajes">
+                    <button type="button" id="boton-guardar-personaje">Guardar</button>
+                    <button type="button" id="boton-cancelar-creacion">Cancelar</button>
+                </div>
+            </form>
         </div>
-        <div class="personaje-option">
-            <input type="radio" name="personaje" id="aang">
-            <label for="aang">Aang</label>
-        </div>
-        <div class="personaje-option">
-            <input type="radio" name="personaje" id="toph">
-            <label for="toph">Toph</label>
-        </div>
-        <button id="boton-personaje">Seleccionar</button>
+
     </section>
+
 
     <section id="seleccionar-ataque">
         <h2>Elige tu ataque</h2>

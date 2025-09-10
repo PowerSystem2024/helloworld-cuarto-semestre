@@ -55,6 +55,12 @@ h2 {
     gap: 10px;
 }
 
+#personajes-lista {
+    display: flex; /* Tipo de Display: Flexbox */
+    flex-direction: column;
+    gap: 10px;
+}
+
 .personaje-option {
     display: flex; /* Tipo de Display: Flexbox */
     align-items: center;
@@ -278,3 +284,35 @@ section:not(.oculto) {
   transition: all 0.5s ease;
 }
 
+.botones-personajes {
+    display: flex;
+    gap: 10px; /* espacio entre los botones */
+    margin-top: 10px;
+}
+
+
+/* Formularios */
+form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #e2e8f0;
+}
+
+form input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #4fd1c7;
+    border-radius: 8px;
+    background: rgba(74, 85, 104, 0.6);
+    color: #e2e8f0;
+    font-size: 1rem;
+    transition: border 0.3s ease, background 0.3s ease;
+}
+
+form input:focus {
+    border-color: #81d4fa;
+    outline: none;
+    background: rgba(74, 85, 104, 0.8);
+}

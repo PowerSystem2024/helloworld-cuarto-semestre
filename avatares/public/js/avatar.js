@@ -18,30 +18,35 @@ let sectionSeleccionarAtaque;
 let sectionReglas;
 let sectionMensajes;
 let botonPersonaje;
-let botonPunio;
-let botonPatada;
-let botonBarrida;
+let botonCrearPersonaje;
 let botonReiniciar;
 let botonVerReglas;
 let botonCerrarReglas;
-let radioZuko;
-let radioKatara;
-let radioAang;
-let radioToph;
 
-// Constantes del juego
+
+let crearPersonajeForm;
+let inputNuevoNombre;
+let inputNuevasVidas;
+let botonGuardarPersonaje;
+let botonCancelarCreacion;
+
+
+// Mapeo entre los tipos de ataque con su emoji correspondiente
 const ATAQUES = {
-    PUNIO: 'Puño',
-    PATADA: 'Patada',
-    BARRIDA: 'Barrida'
-}
+    puño: { texto: "Puño", emoji: "👊" },
+    patada: { texto: "Patada", emoji: "🦶" },
+    barrida: { texto: "Barrida", emoji: "💨" }
+};
 
-const PERSONAJES = {
-    1: 'Zuko',
-    2: 'Katara',
-    3: 'Aang',
-    4: 'Toph'
-}
+const ATAQUES_COMUNES = ['Puño', 'Patada', 'Barrida'];
+
+let PERSONAJES = {
+    1: { nombre: 'Zuko', vidas: 3, ataques: ATAQUES_COMUNES },
+    2: { nombre: 'Katara', vidas: 3, ataques: ATAQUES_COMUNES },
+    3: { nombre: 'Aang', vidas: 3, ataques: ATAQUES_COMUNES },
+    4: { nombre: 'Toph', vidas: 3, ataques: ATAQUES_COMUNES }
+};
+
 
 const MENSAJES = {
     EMPATE: '🤝 ¡EMPATE! Ambos atacaron con ',
@@ -51,7 +56,7 @@ const MENSAJES = {
     PERDISTE_JUEGO: '☠️ ¡HAS PERDIDO EL JUEGO!',
     SELECCIONAR_PERSONAJE: '❗ Por favor selecciona un personaje para jugar.',
     SELECCIONAR_ANTES_ATACAR: '❗❗ Debes seleccionar un personaje antes de atacar.❗❗'
-}
+};
 
 function inicializarElementosDOM() {
     // Elementos de interfaz
@@ -68,22 +73,30 @@ function inicializarElementosDOM() {
     
     // Botones
     botonPersonaje = document.getElementById("boton-personaje");
-    botonPunio = document.getElementById('boton-punio');
-    botonPatada = document.getElementById('boton-patada');
-    botonBarrida = document.getElementById('boton-barrida');
+    botonCrearPersonaje = document.getElementById("boton-crear-personaje");
     botonReiniciar = document.getElementById('boton-reiniciar').querySelector('button');
     botonVerReglas = document.getElementById('boton-ver-reglas');
     botonCerrarReglas = document.getElementById('boton-cerrar-reglas');
     
-    // Radio buttons
-    radioZuko = document.getElementById("zuko");
-    radioKatara = document.getElementById("katara");
-    radioAang = document.getElementById("aang");
-    radioToph = document.getElementById("toph");
+
+
+    crearPersonajeForm = document.getElementById('crear-personaje-form');
+    inputNuevoNombre = document.getElementById('nuevo-nombre');
+    inputNuevasVidas = document.getElementById('nuevas-vidas');
+    botonGuardarPersonaje = document.getElementById('boton-guardar-personaje');
+    botonCancelarCreacion = document.getElementById('boton-cancelar-creacion');
+
+    
+
+
+
 }
 
 function iniciarJuego() {
     inicializarElementosDOM();
+
+    // Renderizar personajes por defecto
+    renderPersonajes();
     
     sectionSeleccionarPersonaje.classList.remove("oculto");
     sectionSeleccionarAtaque.classList.add("oculto");
@@ -91,9 +104,9 @@ function iniciarJuego() {
 
     // Event listeners
     botonPersonaje.addEventListener("click", seleccionarPersonajeJugador);
-    botonPunio.addEventListener('click', () => manejarAtaque(ATAQUES.PUNIO));
-    botonPatada.addEventListener('click', () => manejarAtaque(ATAQUES.PATADA));
-    botonBarrida.addEventListener('click', () => manejarAtaque(ATAQUES.BARRIDA));
+    botonCrearPersonaje.addEventListener('click', mostrarFormularioCrearPersonaje);
+    botonGuardarPersonaje.addEventListener('click', guardarNuevoPersonaje);
+    botonCancelarCreacion.addEventListener('click', cancelarCreacionPersonaje);
     botonReiniciar.addEventListener('click', reiniciarJuego);
     botonVerReglas.addEventListener('click', mostrarReglas);
     botonCerrarReglas.addEventListener('click', ocultarReglas);
@@ -101,13 +114,10 @@ function iniciarJuego() {
     deshabilitarBotones();
 }
 
-function mostrarReglas() {
-    sectionReglas.classList.remove('oculto');
-}
 
-function ocultarReglas() {
-    sectionReglas.classList.add('oculto');
-}
+function mostrarReglas() {sectionReglas.classList.remove('oculto');}
+function ocultarReglas() {sectionReglas.classList.add('oculto');}
+
 
 function seleccionarPersonajeJugador() {
 
@@ -118,35 +128,63 @@ function seleccionarPersonajeJugador() {
         return;
     }
 
-    
     // Se crea una instancia del personaje elegido
-    jugador = new Personaje(personajeElegido, 3);
+    jugador = new Personaje(personajeElegido.nombre, personajeElegido.vidas, personajeElegido.ataques);
     spanPersonajeJugador.innerHTML = jugador.nombre;
     spanVidasJugador.innerHTML = jugador.vidas;
 
+    // Se crea instancia de enemigo
     seleccionarPersonajeEnemigo();
+
+
+    // Se renderizan botones de ataque correspondientes al personaje elegido
+    renderBotonesAtaque();
+
 
     // Cambiar pantallas
     sectionSeleccionarPersonaje.classList.add("oculto");
     sectionSeleccionarAtaque.classList.remove("oculto");
 
-    habilitarBotones();
 }
 
 function obtenerPersonajeSeleccionado() {
-    if (radioZuko.checked) return PERSONAJES[1];
-    if (radioKatara.checked) return PERSONAJES[2];
-    if (radioAang.checked) return PERSONAJES[3];
-    if (radioToph.checked) return PERSONAJES[4];
-    return null;
+    const radios = document.querySelectorAll('input[name="personaje"]');
+    const radioSeleccionado = Array.from(radios).find(radio => radio.checked);
+    if (!radioSeleccionado) return null;
+
+    const id = radioSeleccionado.id.replace('personaje-', '');
+    return PERSONAJES[Number(id)];
 }
 
+
+
 function seleccionarPersonajeEnemigo() {
-    let personajeAleatorio = PERSONAJES[aleatorio(1, 4)];
-    enemigo = new Personaje(personajeAleatorio, 3);
+    const llaves = Object.keys(PERSONAJES);
+    const indiceAleatorio = aleatorio(0, llaves.length - 1);
+    const p = PERSONAJES[llaves[indiceAleatorio]];
+    enemigo = new Personaje(p.nombre, p.vidas, p.ataques);
     spanPersonajeEnemigo.innerHTML = enemigo.nombre;
     spanVidasEnemigo.innerHTML = enemigo.vidas;
 }
+
+
+// Renderizar botones de ataque según personaje elegido por jugador
+function renderBotonesAtaque() {
+    const contenedor = document.querySelector('.botones-ataque');
+    contenedor.innerHTML = '';
+    
+    jugador.ataques.forEach(ataque => {
+        const clave = ataque.toLowerCase(); // convierte 'Puño' en 'puño' para buscar en ATAQUES
+        const { texto, emoji } = ATAQUES[clave] || { texto: ataque, emoji: "" };
+        
+        const btn = document.createElement('button');
+        btn.innerHTML = texto + ' ' + emoji; // mostrar el ataque con el emoji
+        btn.addEventListener('click', () => manejarAtaque(ataque));
+        
+        contenedor.appendChild(btn);
+    });
+}
+
 
 function manejarAtaque(tipoAtaque) {
     if (!jugador) {
@@ -160,15 +198,14 @@ function manejarAtaque(tipoAtaque) {
 }
 
 function ataqueAleatorioEnemigo() {
-    let ataqueAleatorio = aleatorio(1, 3);
-    ataqueEnemigo = ataqueAleatorio == 1 ? ATAQUES.PUNIO : 
-                    ataqueAleatorio == 2 ? ATAQUES.PATADA : 
-                    ATAQUES.BARRIDA;
+    const listaAtaques = enemigo.ataques;
+    ataqueEnemigo = listaAtaques[aleatorio(0, listaAtaques.length - 1)];
     combates();
 }
 
 function combates() {
     limpiarMensajes();
+    
     crearMensajeCombate("⚔️ Tú atacaste con: " + ataqueJugador + " | Enemigo atacó con: " + ataqueEnemigo);
 
     let resultado = determinarResultado();
@@ -191,26 +228,25 @@ function combates() {
     
     crearMensajeCombate("💙 Vidas restantes - Tú: " + jugador.vidas + " | Enemigo: " + enemigo.vidas);
     crearMensajeCombate("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+
     revisarVidas();
 }
 
+// Para nuevos tipos de ataque hay que determinar lógica aqui
 function determinarResultado() {
     if (ataqueJugador === ataqueEnemigo) {
         return 'empate';
     }
     
     const combinacionesGanadoras = [
-        [ATAQUES.PUNIO, ATAQUES.BARRIDA],
-        [ATAQUES.PATADA, ATAQUES.PUNIO],
-        [ATAQUES.BARRIDA, ATAQUES.PATADA]
+        [jugador.ataques[0], jugador.ataques[2]], // Puño gana a Barrida
+        [jugador.ataques[1], jugador.ataques[0]], // Patada gana a Puño
+        [jugador.ataques[2], jugador.ataques[1]]  // Barrida gana a Patada
     ];
     
-    for (let combinacion of combinacionesGanadoras) {
-        if (ataqueJugador == combinacion[0] && ataqueEnemigo == combinacion[1]) {
-            return 'victoria';
-        }
+    for (let [gana, pierde] of combinacionesGanadoras) {
+        if (ataqueJugador === gana && ataqueEnemigo === pierde) return 'victoria';
     }
-    
     return 'derrota';
 }
 
@@ -239,16 +275,84 @@ function revisarVidas() {
 }
 
 function deshabilitarBotones() {
-    botonPunio.disabled = true;
-    botonPatada.disabled = true;
-    botonBarrida.disabled = true;
+    const botones = document.querySelectorAll('.botones-ataque button');
+    botones.forEach(btn => btn.disabled = true);
 }
 
-function habilitarBotones() {
-    botonPunio.disabled = false;
-    botonPatada.disabled = false;
-    botonBarrida.disabled = false;
+//function habilitarBotones() {
+//    const botones = document.querySelectorAll('.botones-ataque button');
+//    botones.forEach(btn => btn.disabled = false);
+//}
+
+
+function guardarNuevoPersonaje() {
+    let nombre = inputNuevoNombre.value.trim();
+    let vidas = parseInt(inputNuevasVidas.value, 10);
+
+    if (!nombre) { 
+        alert("Ingresa un nombre válido"); 
+        return; 
+    }
+
+    if (isNaN(vidas) || vidas <= 0) { 
+        vidas = 3; // Por defecto
+    }
+
+    // Crear ID nuevo
+    const nuevaId = Object.keys(PERSONAJES).length + 1;
+    PERSONAJES[nuevaId] = { nombre, vidas, ataques: ATAQUES_COMUNES };
+
+    // Volver a renderizar la lista completa
+    renderPersonajes();
+
+    // Limpiar formulario y regresar a selección
+    cancelarCreacionPersonaje();
 }
+
+
+function mostrarFormularioCrearPersonaje() {
+    document.getElementById('vista-personajes').classList.add('oculto');
+    document.getElementById('vista-crear-personaje').classList.remove('oculto');
+}
+
+function cancelarCreacionPersonaje() {
+    document.getElementById('vista-crear-personaje').classList.add('oculto');
+    document.getElementById('vista-personajes').classList.remove('oculto');
+    inputNuevoNombre.value = '';
+    inputNuevasVidas.value = '';
+}
+
+
+
+function renderPersonajes() {
+    const contenedor = document.getElementById('personajes-lista');
+    contenedor.innerHTML = ''; // limpiar antes de generar
+
+    Object.keys(PERSONAJES).forEach(id => {
+        const personaje = PERSONAJES[id];
+
+        const div = document.createElement('div');
+        div.classList.add('personaje-option');
+
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'personaje';
+        input.id = `personaje-${id}`; // id único
+
+        const label = document.createElement('label');
+        label.htmlFor = `personaje-${id}`;
+        label.textContent = personaje.nombre;
+
+        div.appendChild(input);
+        div.appendChild(label);
+
+        contenedor.appendChild(div);
+    });
+}
+
+
+
+
 
 function reiniciarJuego() {
     location.reload();

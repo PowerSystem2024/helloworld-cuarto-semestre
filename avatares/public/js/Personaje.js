@@ -1,7 +1,8 @@
 export default class Personaje {
-    constructor(nombre, vidas) {
+    constructor(nombre, vidas, ataques) {
         this.nombre = nombre;
         this.vidas = vidas;
+        this.ataques = ataques;
     }
 
     recibirDaño() {
