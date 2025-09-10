@@ -1,5 +1,5 @@
 // Importación de la clase Personaje
-import { Personaje } from './Personaje.js';
+import Personaje from './Personaje.js';
 
 // Variables globales de estado del juego
 let jugador = null; // Instancia del Personaje elegido por el Jugador

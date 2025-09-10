@@ -1,4 +1,4 @@
-export class Personaje {
+export default class Personaje {
     constructor(nombre, vidas) {
         this.nombre = nombre;
         this.vidas = vidas;
