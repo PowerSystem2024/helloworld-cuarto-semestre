@@ -1,0 +1,318 @@
+/* Importar fuentes Inter y Poppins desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;700&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Arial', sans-serif; /* Fuente base para todo el texto */
+    background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%); /* Background-color a todo el sitio */
+    min-height: 100vh;
+    padding: 20px;
+    color: #e2e8f0;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #81d4fa; /* Color al h1 */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    margin-bottom: 30px;
+    background-color: rgba(26, 32, 44, 0.8); /* Background-color al h1 */
+    padding: 15px;
+    border-radius: 10px;
+}
+
+h1, h2, h3 {
+    font-family: 'Poppins', 'Inter', sans-serif; /* Fuente diferenciada solo para títulos */
+    font-weight: 700;
+}
+
+section {
+    background: rgba(45, 55, 72, 0.9);
+    border: 1px solid rgba(129, 212, 250, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+h2 {
+    color: #81d4fa;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+#seleccionar-personaje {
+    display: flex; /* Tipo de Display: Flexbox */
+    flex-direction: column;
+    gap: 10px;
+}
+
+#personajes-lista {
+    display: flex; /* Tipo de Display: Flexbox */
+    flex-direction: column;
+    gap: 10px;
+}
+
+.personaje-option {
+    display: flex; /* Tipo de Display: Flexbox */
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    background: rgba(74, 85, 104, 0.4);
+}
+
+.personaje-option:hover {
+    background: rgba(74, 85, 104, 0.7);
+    border-color: #4fd1c7;
+}
+
+.personaje-option input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #4fd1c7;
+}
+
+.personaje-option label {
+    cursor: pointer;
+    font-weight: bold;
+    color: #e2e8f0;
+}
+
+button {
+    background: linear-gradient(45deg, #2c5282, #3182ce);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px auto;
+    display: block; /* Tipo de Display: Block */
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+
+button:hover {
+    background: linear-gradient(45deg, #3182ce, #4299e1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+#seleccionar-ataque p {
+    text-align: center;
+    margin: 15px 0;
+    font-size: 1.1rem;
+    color: #cbd5e0;
+}
+
+#seleccionar-ataque .vidas {
+    font-weight: bold;
+    color: #4fd1c7;
+}
+
+.botones-ataque {
+    display: flex;  /* Tipo de Display: Flexbox */
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.botones-ataque button {
+    margin: 5px;
+    min-width: 120px;
+}
+
+#boton-punio {
+    background: linear-gradient(45deg, #c53030, #e53e3e);
+}
+
+#boton-punio:hover {
+    background: linear-gradient(45deg, #e53e3e, #fc8181);
+}
+
+#boton-patada {
+    background: linear-gradient(45deg, #2b6cb0, #3182ce);
+}
+
+#boton-patada:hover {
+    background: linear-gradient(45deg, #3182ce, #63b3ed);
+}
+
+#boton-barrida {
+    background: linear-gradient(45deg, #553c9a, #805ad5);
+}
+
+#boton-barrida:hover {
+    background: linear-gradient(45deg, #805ad5, #b794f6);
+}
+
+/* #boton-aire {
+    background: linear-gradient(45deg, #0891b2, #06b6d4);
+}
+
+#boton-aire:hover {
+    background: linear-gradient(45deg, #06b6d4, #67e8f9);
+} */
+
+#mensajes {
+    background: rgba(26, 32, 44, 0.8);
+    border-left: 4px solid #4fd1c7;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #e2e8f0;
+}
+
+#boton-reiniciar button {
+    background: linear-gradient(45deg, #38a169, #48bb78);
+    font-size: 1.1rem;
+    padding: 15px 30px;
+}
+
+#boton-reiniciar button:hover {
+    background: linear-gradient(45deg, #48bb78, #68d391);
+}
+
+/* Ajustes para pantallas medianas y pequeñas */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.3rem;
+    }
+    
+    section {
+        width: 90%;
+        margin: 15px auto;
+        padding: 15px;
+    }
+    
+    .botones-ataque {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Ajustes adicionales para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1.1rem;
+    }
+    
+    section {
+        width: 95%;
+        padding: 10px;
+    }
+}
+
+
+#reglas-juego {
+    background: rgba(26, 32, 44, 0.95);
+    border: 2px solid #4fd1c7;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    color: #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+#reglas-juego h2 {
+    text-align: center;
+    color: #81d4fa;
+    margin-bottom: 10px;
+}
+
+#reglas-juego ul {
+    list-style: disc;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+#boton-ver-reglas,
+#boton-cerrar-reglas {
+    background: linear-gradient(45deg, #4fd1c7, #81e6d9);
+    color: #1a202c;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    display: block; /* Tipo de Display: Block */
+    margin: 10px auto;
+}
+
+#boton-ver-reglas:hover,
+#boton-cerrar-reglas:hover {
+    background: linear-gradient(45deg, #38b2ac, #5eead4);
+}
+
+.oculto {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+section:not(.oculto) {
+  max-height: 1000px;
+  opacity: 1;
+  transition: all 0.5s ease;
+}
+
+.botones-personajes {
+    display: flex;
+    gap: 10px; /* espacio entre los botones */
+    margin-top: 10px;
+}
+
+
+/* Formularios */
+form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #e2e8f0;
+}
+
+form input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #4fd1c7;
+    border-radius: 8px;
+    background: rgba(74, 85, 104, 0.6);
+    color: #e2e8f0;
+    font-size: 1rem;
+    transition: border 0.3s ease, background 0.3s ease;
+}
+
+form input:focus {
+    border-color: #81d4fa;
+    outline: none;
+    background: rgba(74, 85, 104, 0.8);
+}
