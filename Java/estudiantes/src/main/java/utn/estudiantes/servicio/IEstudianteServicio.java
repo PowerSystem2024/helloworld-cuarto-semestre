@@ -1,14 +1,14 @@
 package utn.estudiantes.servicio;
 
-import utn.estudiantes.modelo.Estudiante;
+import utn.estudiantes.modelo.Estudiantes;
 import java.util.List;
 
 
 public interface IEstudianteServicio {
 
-    public List<Estudiante> listarEstudiantes();
-    public Estudiante buscarEstudiantePorId(Integer idEstudiante);
-    public void guardarEstudiante(Estudiante estudiante);
-    public void eliminarEstudiante(Estudiante estudiante);
+    public List<Estudiantes> listarEstudiantes();
+    public Estudiantes buscarEstudiantePorId(Integer idestudiantes);
+    public void guardarEstudiante(Estudiantes estudiante);
+    public void eliminarEstudiante(Estudiantes estudiante);
 
 }
