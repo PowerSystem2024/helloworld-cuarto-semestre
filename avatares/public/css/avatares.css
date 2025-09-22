@@ -1,7 +1,6 @@
 /* Importar fuentes Inter y Poppins desde Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;700&display=swap');
 
-
 * {
     margin: 0;
     padding: 0;
@@ -9,27 +8,34 @@
 }
 
 body {
-    font-family: 'Inter', 'Arial', sans-serif; /* Fuente base para todo el texto */
-    background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%); /* Background-color a todo el sitio */
+    font-family: 'Inter', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
     min-height: 100vh;
     padding: 20px;
     color: #e2e8f0;
 }
 
+h1, h2, h3 {
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-weight: 700;
+}
+
 h1 {
     text-align: center;
     font-size: 2.5rem;
-    color: #81d4fa; /* Color al h1 */
+    color: #81d4fa;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     margin-bottom: 30px;
-    background-color: rgba(26, 32, 44, 0.8); /* Background-color al h1 */
+    background-color: rgba(26, 32, 44, 0.8);
     padding: 15px;
     border-radius: 10px;
 }
 
-h1, h2, h3 {
-    font-family: 'Poppins', 'Inter', sans-serif; /* Fuente diferenciada solo para títulos */
-    font-weight: 700;
+h2 {
+    color: #81d4fa;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.5rem;
 }
 
 section {
@@ -42,55 +48,48 @@ section {
     box-shadow: 0 5px 15px rgba(0,0,0,0.4);
 }
 
-h2 {
-    color: #81d4fa;
-    margin-bottom: 15px;
-    text-align: center;
-    font-size: 1.5rem;
-}
-
-#seleccionar-personaje {
-    display: flex; /* Tipo de Display: Flexbox */
-    flex-direction: column;
-    gap: 10px;
-}
-
+#seleccionar-personaje,
 #personajes-lista {
-    display: flex; /* Tipo de Display: Flexbox */
+    display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
+/* Opciones de personaje */
 .personaje-option {
-    display: flex; /* Tipo de Display: Flexbox */
-    align-items: center;
-    gap: 10px;
-    padding: 12px;
     border: 2px solid transparent;
     border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: bold;
     background: rgba(74, 85, 104, 0.4);
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-.personaje-option:hover {
-    background: rgba(74, 85, 104, 0.7);
-    border-color: #4fd1c7;
+/* Label que ocupa todo el recuadro */
+.personaje-option label {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 12px;
+    font-weight: bold;
+    color: #e2e8f0;
+    cursor: pointer;
 }
 
+/* Radio button */
 .personaje-option input[type="radio"] {
+    margin-right: 12px;
     width: 20px;
     height: 20px;
     accent-color: #4fd1c7;
 }
 
-.personaje-option label {
-    cursor: pointer;
-    font-weight: bold;
-    color: #e2e8f0;
+/* Hover del recuadro */
+.personaje-option:hover {
+    background: rgba(74, 85, 104, 0.7);
+    border-color: #4fd1c7;
 }
 
+/* Botones */
 button {
     background: linear-gradient(45deg, #2c5282, #3182ce);
     color: white;
@@ -102,7 +101,7 @@ button {
     cursor: pointer;
     transition: all 0.3s ease;
     margin: 10px auto;
-    display: block; /* Tipo de Display: Block */
+    display: block;
     box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 
@@ -112,6 +111,7 @@ button:hover {
     box-shadow: 0 5px 15px rgba(0,0,0,0.4);
 }
 
+/* Ataques */
 #seleccionar-ataque p {
     text-align: center;
     margin: 15px 0;
@@ -125,7 +125,7 @@ button:hover {
 }
 
 .botones-ataque {
-    display: flex;  /* Tipo de Display: Flexbox */
+    display: flex;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
@@ -140,7 +140,6 @@ button:hover {
 #boton-punio {
     background: linear-gradient(45deg, #c53030, #e53e3e);
 }
-
 #boton-punio:hover {
     background: linear-gradient(45deg, #e53e3e, #fc8181);
 }
@@ -148,7 +147,6 @@ button:hover {
 #boton-patada {
     background: linear-gradient(45deg, #2b6cb0, #3182ce);
 }
-
 #boton-patada:hover {
     background: linear-gradient(45deg, #3182ce, #63b3ed);
 }
@@ -156,19 +154,11 @@ button:hover {
 #boton-barrida {
     background: linear-gradient(45deg, #553c9a, #805ad5);
 }
-
 #boton-barrida:hover {
     background: linear-gradient(45deg, #805ad5, #b794f6);
 }
 
-/* #boton-aire {
-    background: linear-gradient(45deg, #0891b2, #06b6d4);
-}
-
-#boton-aire:hover {
-    background: linear-gradient(45deg, #06b6d4, #67e8f9);
-} */
-
+/* Mensajes */
 #mensajes {
     background: rgba(26, 32, 44, 0.8);
     border-left: 4px solid #4fd1c7;
@@ -177,59 +167,17 @@ button:hover {
     color: #e2e8f0;
 }
 
+/* Reiniciar */
 #boton-reiniciar button {
     background: linear-gradient(45deg, #38a169, #48bb78);
     font-size: 1.1rem;
     padding: 15px 30px;
 }
-
 #boton-reiniciar button:hover {
     background: linear-gradient(45deg, #48bb78, #68d391);
 }
 
-/* Ajustes para pantallas medianas y pequeñas */
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-    
-    h1 {
-        font-size: 2rem;
-    }
-    
-    h2 {
-        font-size: 1.3rem;
-    }
-    
-    section {
-        width: 90%;
-        margin: 15px auto;
-        padding: 15px;
-    }
-    
-    .botones-ataque {
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
-/* Ajustes adicionales para pantallas muy pequeñas */
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.5rem;
-    }
-    
-    h2 {
-        font-size: 1.1rem;
-    }
-    
-    section {
-        width: 95%;
-        padding: 10px;
-    }
-}
-
-
+/* Reglas del juego */
 #reglas-juego {
     background: rgba(26, 32, 44, 0.95);
     border: 2px solid #4fd1c7;
@@ -262,34 +210,33 @@ button:hover {
     border: none;
     border-radius: 25px;
     cursor: pointer;
-    display: block; /* Tipo de Display: Block */
+    display: block;
     margin: 10px auto;
 }
-
 #boton-ver-reglas:hover,
 #boton-cerrar-reglas:hover {
     background: linear-gradient(45deg, #38b2ac, #5eead4);
 }
 
+/* Ocultar/mostrar secciones */
 .oculto {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: all 0.5s ease;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.5s ease;
 }
-
 section:not(.oculto) {
-  max-height: 1000px;
-  opacity: 1;
-  transition: all 0.5s ease;
+    max-height: 1000px;
+    opacity: 1;
+    transition: all 0.5s ease;
 }
 
+/* Flex botones personajes */
 .botones-personajes {
     display: flex;
-    gap: 10px; /* espacio entre los botones */
+    gap: 10px;
     margin-top: 10px;
 }
-
 
 /* Formularios */
 form label {
@@ -310,9 +257,36 @@ form input {
     font-size: 1rem;
     transition: border 0.3s ease, background 0.3s ease;
 }
-
 form input:focus {
     border-color: #81d4fa;
     outline: none;
     background: rgba(74, 85, 104, 0.8);
+}
+
+/* Ajustes para pantallas medianas y pequeñas */
+@media (max-width: 768px) {
+    body { padding: 10px; }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.3rem; }
+    section { width: 90%; margin: 15px auto; padding: 15px; }
+    .botones-ataque { flex-direction: column; align-items: center; }
+}
+
+/* Ajustes pantallas muy pequeñas */
+@media (max-width: 480px) {
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.1rem; }
+    section { width: 95%; padding: 10px; }
+}
+
+/* Quitar flechas en Chrome, Edge, Safari */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Quitar flechas en Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
 }

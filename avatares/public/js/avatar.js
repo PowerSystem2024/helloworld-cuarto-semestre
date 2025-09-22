@@ -86,6 +86,7 @@ function inicializarElementosDOM() {
     inputNuevasVidas = document.getElementById('nuevas-vidas');
     botonGuardarPersonaje = document.getElementById('boton-guardar-personaje');
     botonCancelarCreacion = document.getElementById('boton-cancelar-creacion');
+    mensajes = document.getElementById('mensajes');
 
     
 
@@ -130,7 +131,8 @@ function seleccionarPersonajeJugador() {
     }
 
     // Se crea una instancia del personaje elegido
-    jugador = new Personaje(personajeElegido.nombre, personajeElegido.vidas, personajeElegido.ataques);
+    jugador = new Personaje(personajeElegido.nombre, personajeElegido.vidas);
+    personajes_lista.push(jugador);
     spanPersonajeJugador.innerHTML = jugador.nombre;
     spanVidasJugador.innerHTML = jugador.vidas;
 
@@ -145,6 +147,9 @@ function seleccionarPersonajeJugador() {
     // Cambiar pantallas
     sectionSeleccionarPersonaje.classList.add("oculto");
     sectionSeleccionarAtaque.classList.remove("oculto");
+    
+    // Mostrar la sección de mensajes ahora que comienza el combate
+    sectionMensajes.classList.remove('oculto');
 
 }
 
@@ -163,7 +168,8 @@ function seleccionarPersonajeEnemigo() {
     const llaves = Object.keys(personajes_informacion);
     const indiceAleatorio = aleatorio(0, llaves.length - 1);
     const p = personajes_informacion[llaves[indiceAleatorio]];
-    enemigo = new Personaje(p.nombre, p.vidas, p.ataques);
+    enemigo = new Personaje(p.nombre, p.vidas);
+    personajes_lista.push(enemigo);
     spanPersonajeEnemigo.innerHTML = enemigo.nombre;
     spanVidasEnemigo.innerHTML = enemigo.vidas;
 }
@@ -205,6 +211,7 @@ function ataqueAleatorioEnemigo() {
 }
 
 function combates() {
+
     limpiarMensajes();
     
     crearMensajeCombate("⚔️ Tú atacaste con: " + ataqueJugador + " | Enemigo atacó con: " + ataqueEnemigo);
@@ -231,6 +238,12 @@ function combates() {
     crearMensajeCombate("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 
     revisarVidas();
+
+    console.log("=== Lista de personajes actuales ===");
+    personajes_lista.forEach((p, i) => {
+        console.log(`${i}: ${p.nombre}, vidas: ${p.vidas}`);
+    });
+
 }
 
 // Para nuevos tipos de ataque hay que determinar lógica aqui
@@ -335,23 +348,27 @@ function renderPersonajes() {
         const div = document.createElement('div');
         div.classList.add('personaje-option');
 
+        // Creamos un label que contenga el input y el nombre
+        const label = document.createElement('label');
+        label.style.display = 'flex';
+        label.style.alignItems = 'center';
+        label.style.width = '100%';
+        label.style.cursor = 'pointer';
+        label.style.padding = '10px';
+
         const input = document.createElement('input');
         input.type = 'radio';
         input.name = 'personaje';
         input.id = `personaje-${id}`; // id único
+        input.style.marginRight = '10px'; // separación entre radio y nombre
 
-        const label = document.createElement('label');
-        label.htmlFor = `personaje-${id}`;
-        label.textContent = personaje.nombre;
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(personaje.nombre));
 
-        div.appendChild(input);
         div.appendChild(label);
-
         contenedor.appendChild(div);
     });
 }
-
-
 
 
 
