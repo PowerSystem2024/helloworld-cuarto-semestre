@@ -38,14 +38,15 @@ const ATAQUES = {
     barrida: { texto: "Barrida", emoji: "💨" }
 };
 
-const ATAQUES_COMUNES = ['Puño', 'Patada', 'Barrida'];
 
-let PERSONAJES = {
-    1: { nombre: 'Zuko', vidas: 3, ataques: ATAQUES_COMUNES },
-    2: { nombre: 'Katara', vidas: 3, ataques: ATAQUES_COMUNES },
-    3: { nombre: 'Aang', vidas: 3, ataques: ATAQUES_COMUNES },
-    4: { nombre: 'Toph', vidas: 3, ataques: ATAQUES_COMUNES }
+let personajes_informacion = {
+    1: { nombre: 'Zuko', vidas: 3 },
+    2: { nombre: 'Katara', vidas: 3 },
+    3: { nombre: 'Aang', vidas: 3 },
+    4: { nombre: 'Toph', vidas: 3 }
 };
+
+let personajes_lista = []; // aquí se guardan las instancias de Personaje
 
 
 const MENSAJES = {
@@ -153,15 +154,15 @@ function obtenerPersonajeSeleccionado() {
     if (!radioSeleccionado) return null;
 
     const id = radioSeleccionado.id.replace('personaje-', '');
-    return PERSONAJES[Number(id)];
+    return personajes_informacion[Number(id)];
 }
 
 
 
 function seleccionarPersonajeEnemigo() {
-    const llaves = Object.keys(PERSONAJES);
+    const llaves = Object.keys(personajes_informacion);
     const indiceAleatorio = aleatorio(0, llaves.length - 1);
-    const p = PERSONAJES[llaves[indiceAleatorio]];
+    const p = personajes_informacion[llaves[indiceAleatorio]];
     enemigo = new Personaje(p.nombre, p.vidas, p.ataques);
     spanPersonajeEnemigo.innerHTML = enemigo.nombre;
     spanVidasEnemigo.innerHTML = enemigo.vidas;
@@ -299,8 +300,8 @@ function guardarNuevoPersonaje() {
     }
 
     // Crear ID nuevo
-    const nuevaId = Object.keys(PERSONAJES).length + 1;
-    PERSONAJES[nuevaId] = { nombre, vidas, ataques: ATAQUES_COMUNES };
+    const nuevaId = Object.keys(personajes_informacion).length + 1;
+    personajes_informacion[nuevaId] = { nombre, vidas };
 
     // Volver a renderizar la lista completa
     renderPersonajes();
@@ -328,8 +329,8 @@ function renderPersonajes() {
     const contenedor = document.getElementById('personajes-lista');
     contenedor.innerHTML = ''; // limpiar antes de generar
 
-    Object.keys(PERSONAJES).forEach(id => {
-        const personaje = PERSONAJES[id];
+    Object.keys(personajes_informacion).forEach(id => {
+        const personaje = personajes_informacion[id];
 
         const div = document.createElement('div');
         div.classList.add('personaje-option');
