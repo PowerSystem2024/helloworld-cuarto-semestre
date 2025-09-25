@@ -1,5 +1,23 @@
-// Importación de la clase Personaje
-import Personaje from './Personaje.js';
+// Clase Personaje
+const ATAQUES_COMUNES = ['Puño', 'Patada', 'Barrida'];
+
+class Personaje {
+    constructor(nombre, vidas = 3, ataques = null) {
+        this.nombre = nombre;
+        this.vidas = vidas;
+        // Si no se pasan ataques, se asignan los comunes
+        this.ataques = ataques && ataques.length > 0 ? ataques : ATAQUES_COMUNES;
+    }
+
+    recibirDaño() {
+        this.vidas--;
+        if (this.vidas < 0) this.vidas = 0;
+    }
+
+    estaVivo() {
+        return this.vidas > 0;
+    }
+}
 
 // Variables globales de estado del juego
 let jugador = null; // Instancia del Personaje elegido por el Jugador
@@ -86,9 +104,7 @@ function inicializarElementosDOM() {
     inputNuevasVidas = document.getElementById('nuevas-vidas');
     botonGuardarPersonaje = document.getElementById('boton-guardar-personaje');
     botonCancelarCreacion = document.getElementById('boton-cancelar-creacion');
-    mensajes = document.getElementById('mensajes');
 
-    
 
 
 
@@ -185,6 +201,7 @@ function renderBotonesAtaque() {
         const { texto, emoji } = ATAQUES[clave] || { texto: ataque, emoji: "" };
         
         const btn = document.createElement('button');
+        btn.id = `boton-${clave}`;
         btn.innerHTML = texto + ' ' + emoji; // mostrar el ataque con el emoji
         btn.addEventListener('click', () => manejarAtaque(ataque));
         

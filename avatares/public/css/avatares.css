@@ -137,10 +137,10 @@ button:hover {
     min-width: 120px;
 }
 
-#boton-punio {
+#boton-puño {
     background: linear-gradient(45deg, #c53030, #e53e3e);
 }
-#boton-punio:hover {
+#boton-puño:hover {
     background: linear-gradient(45deg, #e53e3e, #fc8181);
 }
 
