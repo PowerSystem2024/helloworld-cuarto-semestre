@@ -72,7 +72,7 @@ public class EstudiantesApplication implements CommandLineRunner {
 					if (estudiante != null) {
 						logger.info("Estudiante Encontrado: " + estudiante + nl);
 					} else {
-						logger.info("Estudiante NO Encontrado: " + estudiante + nl);
+						logger.info("Estudiante NO Encontrado con id: " + idEstudiante + nl);
 					}
 				} // Fin caso 2
 				case 3 -> { //Agregar estudiante
@@ -134,7 +134,7 @@ public class EstudiantesApplication implements CommandLineRunner {
 						estudianteServicio.eliminarEstudiante(estudiante);
 					}
 					else
-						logger.info("Estudiante NO Eliminado con id: " + idEstudiante);
+						logger.info("Estudiante NO Eliminado con id: " + idEstudiante + nl);
 				}//Fin caso 5
 
 				case 6 -> { //salir

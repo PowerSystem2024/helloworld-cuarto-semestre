@@ -4,7 +4,6 @@ export default class Personaje {
     constructor(nombre, vidas = 3, ataques = null) {
         this.nombre = nombre;
         this.vidas = vidas;
-        // Si no se pasan ataques, se asignan los comunes
         this.ataques = ataques && ataques.length > 0 ? ataques : ATAQUES_COMUNES;
     }
 
