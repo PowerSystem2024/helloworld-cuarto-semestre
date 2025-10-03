@@ -1,11 +1,11 @@
 import os
 
-# Dimensiones de la pantalla
-SCREEN_WIDTH = 1200
-SCREEN_HEIGHT = 800
+# Dimensión de la pantalla
+SCREEN_WITDH = 800
+SCREEN_HEIGHT = 600
 
-# Colores
-COLOR_LASER = (0, 0, 225) # Azul
+# Colores de la pantalla
+COLOR_LASER = (0, 0, 255) # Azul
 
-# Ruta a los assets
-ASSETS_PATH = os.path.join(os.path.dirname(__file__), 'assets_1')
+# Ruta a la carpeta assets
+ASSETS_PATH = os.path.join(os.path.dirname(__file__), 'assets')
