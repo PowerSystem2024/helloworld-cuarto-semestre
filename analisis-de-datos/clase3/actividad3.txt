@@ -1,0 +1,7 @@
+Actividad
+
+2- Realizar en grupo la ejercitación de Poo, utilizando diagrama UML. Enviar trabajo 1 por grupo. Fecha de entrega 09/09
+
+
+•Imaginemos un sistema de gestión de empleados con una clase base Empleado y subclases como Desarrollador y Gerente, que heredan atributos y métodos de la clase base.
+• Realizarlo en diagrama UML 
