@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import utn.tienda_libros.modelo.Libro;
 import utn.tienda_libros.servicio.LibroServicio;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -31,6 +33,8 @@ public class LibroForm extends JFrame {
     JButton agregarButton = new JButton("Agregar");
     JButton modificarButton = new JButton("Modificar");
     JButton eliminarButton = new JButton("Eliminar");
+
+    private static final Logger logger = LoggerFactory.getLogger(LibroForm.class);
 
     @Autowired
     public LibroForm(LibroServicio libroServicio) {
@@ -131,49 +135,79 @@ public class LibroForm extends JFrame {
     //}
 
     private void iniciarForma() {
+        // ===== Look and Feel moderno =====
+        try {
+            UIManager.setLookAndFeel(new com.formdev.flatlaf.FlatLightLaf());
+            UIManager.put("Button.arc", 15);
+            UIManager.put("TextComponent.arc", 10);
+            UIManager.put("Component.focusWidth", 1);
+            UIManager.put("Table.showHorizontalLines", true);
+            UIManager.put("Table.showVerticalLines", false);
+            UIManager.put("Table.intercellSpacing", new Dimension(0, 5));
+            UIManager.put("Table.selectionBackground", new Color(60, 120, 200));
+            UIManager.put("Table.selectionForeground", Color.WHITE);
+            UIManager.put("Table.font", new Font("Segoe UI", Font.PLAIN, 14));
+            UIManager.put("Label.font", new Font("Segoe UI", Font.PLAIN, 14));
+            UIManager.put("Button.font", new Font("Segoe UI", Font.BOLD, 14));
+            UIManager.put("Label.foreground", new Color(60, 60, 60));
+        } catch (UnsupportedLookAndFeelException e) {
+            logger.error("Error al aplicar FlatLaf", e);
+        }
+
+        // ===== Panel principal =====
         panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
+        panel.setBackground(new Color(245, 247, 250));
 
         // ===== Título =====
         JLabel lblTitulo = new JLabel("Tienda de Libros");
-        lblTitulo.setFont(new Font("SansSerif", Font.BOLD, 28));
+        lblTitulo.setFont(new Font("Segoe UI", Font.BOLD, 28));
         lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+        lblTitulo.setForeground(new Color(40, 60, 90));
         panel.add(lblTitulo, BorderLayout.NORTH);
 
         // ===== Tabla =====
         idTexto = new JTextField("");
         idTexto.setVisible(false);
-        this.tablaModeloLibros = new DefaultTableModel(0, 5){
+
+        this.tablaModeloLibros = new DefaultTableModel(0, 5) {
             @Override
-            public boolean isCellEditable(int row, int column){
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
         String[] cabecera = {"Id", "Libro", "Autor", "Precio", "Existencias"};
         this.tablaModeloLibros.setColumnIdentifiers(cabecera);
+
         this.tablaLibros = new JTable(tablaModeloLibros);
         tablaLibros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        // Evita que se seleccionen varios registros
         tablaLibros.getTableHeader().setReorderingAllowed(false);
-        // Evita que se puedan reordenar las columnas
+        tablaLibros.setRowHeight(28);
+        tablaLibros.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14));
+        tablaLibros.getTableHeader().setBackground(new Color(230, 230, 230));
+        tablaLibros.getTableHeader().setOpaque(false);
+        tablaLibros.setGridColor(new Color(240, 240, 240));
+
         JScrollPane scrollPane = new JScrollPane(tablaLibros);
+        scrollPane.getViewport().setBackground(Color.WHITE);
 
         JPanel panelCentro = new JPanel(new BorderLayout());
         panelCentro.setBorder(BorderFactory.createEmptyBorder(20, 0, 25, 0));
+        panelCentro.setBackground(new Color(245, 247, 250));
         panelCentro.add(scrollPane, BorderLayout.CENTER);
         panel.add(panelCentro, BorderLayout.CENTER);
 
-        // ===== Panel izquierdo con espaciado simétrico =====
+        // ===== Panel izquierdo (formulario) =====
         JPanel panelIzquierdo = new JPanel(new GridBagLayout());
         panelIzquierdo.setBorder(BorderFactory.createEmptyBorder(20, 0, 25, 30));
+        panelIzquierdo.setBackground(new Color(245, 247, 250));
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 5, 10, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Tamaño uniforme para JTextField
-        Dimension campoDimension = new Dimension(150, 25);
+        Dimension campoDimension = new Dimension(180, 28);
 
-        // Labels y TextFields
         String[] labels = {"Libro", "Autor", "Precio", "Existencias"};
         JTextField[] textFields = new JTextField[4];
         textFields[0] = new JTextField();
@@ -186,7 +220,10 @@ public class LibroForm extends JFrame {
             gbc.gridx = 0;
             gbc.weightx = 0.0;
             gbc.anchor = GridBagConstraints.WEST;
-            panelIzquierdo.add(new JLabel(labels[i]), gbc);
+            JLabel lbl = new JLabel(labels[i]);
+            lbl.setFont(new Font("Segoe UI", Font.BOLD, 14));
+            lbl.setForeground(new Color(70, 70, 70));
+            panelIzquierdo.add(lbl, gbc);
 
             gbc.gridx = 1;
             gbc.weightx = 1.0;
@@ -200,28 +237,41 @@ public class LibroForm extends JFrame {
         precioTexto = textFields[2];
         existenciasTexto = textFields[3];
 
-        // Espacios verticales para distribuir simétricamente
-        for (int i = 0; i < 4; i++) {
-            gbc.gridx = 0;
-            gbc.gridy = i;
-            gbc.weighty = 1.0;
-            panelIzquierdo.add(Box.createVerticalGlue(), gbc);
-        }
-
         panelIzquierdo.setPreferredSize(new Dimension(300, 0));
         panel.add(panelIzquierdo, BorderLayout.WEST);
 
-        // ===== Panel inferior con botones =====
-        JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 100, 0));
+        // ===== Panel inferior (botones modernos) =====
+        JPanel panelBotones = new JPanel(new GridLayout(1, 3, 30, 0));
+        panelBotones.setBorder(BorderFactory.createEmptyBorder(15, 100, 15, 100));
+        panelBotones.setBackground(new Color(245, 247, 250));
 
-        Dimension botonDimension = new Dimension(150, 35);
-        agregarButton.setPreferredSize(botonDimension);
-        modificarButton.setPreferredSize(botonDimension);
-        eliminarButton.setPreferredSize(botonDimension);
+        JButton[] botones = {agregarButton, modificarButton, eliminarButton};
+        Color colorPrimario = new Color(50, 130, 200);
+        Color colorHover = new Color(35, 100, 170);
 
-        panelBotones.add(agregarButton);
-        panelBotones.add(modificarButton);
-        panelBotones.add(eliminarButton);
+        for (JButton b : botones) {
+            b.setFocusPainted(false);
+            b.setBackground(colorPrimario);
+            b.setForeground(Color.WHITE);
+            b.setBorderPainted(false);
+            b.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            b.setPreferredSize(new Dimension(150, 40));
+
+            // Efecto hover simple
+            b.addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mouseEntered(java.awt.event.MouseEvent evt) {
+                    b.setBackground(colorHover);
+                }
+
+                @Override
+                public void mouseExited(java.awt.event.MouseEvent evt) {
+                    b.setBackground(colorPrimario);
+                }
+            });
+
+            panelBotones.add(b);
+        }
 
         panel.add(panelBotones, BorderLayout.SOUTH);
 
@@ -235,6 +285,7 @@ public class LibroForm extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
+
 
     private void listarLibros() {
         tablaModeloLibros.setRowCount(0);
