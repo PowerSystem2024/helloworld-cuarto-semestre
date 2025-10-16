@@ -8,6 +8,9 @@ import utn.tienda_libros.servicio.LibroServicio;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 
 @Component
 public class LibroForm extends JFrame {
@@ -15,6 +18,7 @@ public class LibroForm extends JFrame {
     LibroServicio libroServicio;
     private JPanel panel;
     private JTable tablaLibros;
+    private JTextField idTexto;
     private DefaultTableModel tablaModeloLibros;
 
     // Campos de texto
@@ -35,29 +39,45 @@ public class LibroForm extends JFrame {
         agregarButton.addActionListener(e -> agregarLibro());
         modificarButton.addActionListener(e -> modificarLibro());
         eliminarButton.addActionListener(e -> eliminarLibro());
+        tablaLibros.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e){
+                super.mouseClicked(e);
+                cargarLibroSeleccionado();
+            }
+        });
     }
 
-    private void agregarLibro(){
-        // Leer los valores del formulario
-        if(libroTexto.getText().equals("")){
-            mostrarMensaje("Ingresar nombre del libro.");
-            libroTexto.requestFocusInWindow();
-            return;
-        }
-        var nombreLibro = libroTexto.getText();
-        var autor = autorTexto.getText();
-        var precio = Double.parseDouble(precioTexto.getText());
-        var existencias = Integer.parseInt(existenciasTexto.getText());
-        // Crear objeto Libro
-        var libro = new Libro(null, nombreLibro, autor, precio, existencias);
-//        libro.setNombreLibro(nombreLibro);
-//        libro.setAutor(autor);
-//        libro.setPrecio(precio);
-//        libro.setExistencias(existencias);
-        this.libroServicio.guardarLibro(libro);
-        mostrarMensaje("El libro ha sido agregado exitosamente.");
+    private void agregarLibro() {
+        Libro libro = validarFormulario(null);
+        if (libro == null) return;
+
+        libroServicio.guardarLibro(libro);
+        mostrarMensaje("El libro ha sido agregado.");
         limpiarFormulario();
         listarLibros();
+    }
+
+
+    private void cargarLibroSeleccionado(){
+        // Los índices de las columnas inician en 0
+        var renglon = tablaLibros.getSelectedRow();
+        if (renglon != -1){
+            String idLibro = tablaLibros.getModel().getValueAt(renglon, 0).toString();
+            idTexto.setText(idLibro);
+            String nombreLibro =
+                    tablaLibros.getModel().getValueAt(renglon, 1).toString();
+            libroTexto.setText(nombreLibro);
+            String autor =
+                    tablaLibros.getModel().getValueAt(renglon, 2).toString();
+            autorTexto.setText(autor);
+            String precio =
+                    tablaLibros.getModel().getValueAt(renglon, 3).toString();
+            precioTexto.setText(precio);
+            String existencias =
+                    tablaLibros.getModel().getValueAt(renglon, 4).toString();
+            existenciasTexto.setText(existencias);
+        }
     }
 
     private void limpiarFormulario(){
@@ -71,13 +91,44 @@ public class LibroForm extends JFrame {
         JOptionPane.showMessageDialog(this, mensaje);
     }
 
-    private void modificarLibro(){
+    private void modificarLibro() {
+        if (idTexto.getText().isEmpty()) {
+            mostrarMensaje("Se debe seleccionar un registro en la tabla.");
+            return;
+        }
 
+        int idLibro = Integer.parseInt(idTexto.getText());
+        Libro libro = validarFormulario(idLibro);
+        if (libro == null) return;
+
+        libroServicio.guardarLibro(libro);
+        mostrarMensaje("El libro ha sido modificado.");
+        limpiarFormulario();
+        listarLibros();
     }
+
+
 
     private void eliminarLibro(){
-
+        var renglon = tablaLibros.getSelectedRow();
+        if (renglon != -1){
+            String idLibro =
+                    tablaLibros.getModel().getValueAt(renglon, 0).toString();
+            var libro = new Libro();
+            libro.setIdLibro(Integer.parseInt(idLibro));
+            libroServicio.eliminarLibro(libro);
+            mostrarMensaje("El libro " + idLibro + " ha sido eliminado");
+            limpiarFormulario();
+            listarLibros();
+        }
+        else {
+            mostrarMensaje("No se ha seleccionado ningún libro de la tabla a eliminar.");
+        }
     }
+
+    // private void createUIComponents(){
+    //
+    //}
 
     private void iniciarForma() {
         panel = new JPanel(new BorderLayout());
@@ -90,10 +141,21 @@ public class LibroForm extends JFrame {
         panel.add(lblTitulo, BorderLayout.NORTH);
 
         // ===== Tabla =====
-        tablaModeloLibros = new DefaultTableModel(0, 5);
+        idTexto = new JTextField("");
+        idTexto.setVisible(false);
+        this.tablaModeloLibros = new DefaultTableModel(0, 5){
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
         String[] cabecera = {"Id", "Libro", "Autor", "Precio", "Existencias"};
-        tablaModeloLibros.setColumnIdentifiers(cabecera);
-        tablaLibros = new JTable(tablaModeloLibros);
+        this.tablaModeloLibros.setColumnIdentifiers(cabecera);
+        this.tablaLibros = new JTable(tablaModeloLibros);
+        tablaLibros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        // Evita que se seleccionen varios registros
+        tablaLibros.getTableHeader().setReorderingAllowed(false);
+        // Evita que se puedan reordenar las columnas
         JScrollPane scrollPane = new JScrollPane(tablaLibros);
 
         JPanel panelCentro = new JPanel(new BorderLayout());
@@ -188,4 +250,65 @@ public class LibroForm extends JFrame {
             this.tablaModeloLibros.addRow(renglonLibro);
         });
     }
+
+    private Libro validarFormulario(Integer idActual) {
+        var nombreLibro = libroTexto.getText().trim();
+        var autor = autorTexto.getText().trim();
+        double precio;
+        int existencias;
+
+        if (nombreLibro.isEmpty()) {
+            mostrarMensaje("Ingresar nombre del libro.");
+            libroTexto.requestFocusInWindow();
+            return null;
+        }
+
+        if (autor.isEmpty()) {
+            mostrarMensaje("Ingresar autor del libro.");
+            autorTexto.requestFocusInWindow();
+            return null;
+        }
+
+        try {
+            precio = Double.parseDouble(precioTexto.getText());
+            if (precio < 0) {
+                mostrarMensaje("El precio no puede ser negativo.");
+                precioTexto.requestFocusInWindow();
+                return null;
+            }
+        } catch (NumberFormatException e) {
+            mostrarMensaje("Precio debe ser un valor numérico válido.");
+            precioTexto.requestFocusInWindow();
+            return null;
+        }
+
+        try {
+            existencias = Integer.parseInt(existenciasTexto.getText());
+            if (existencias < 0) {
+                mostrarMensaje("Las existencias no pueden ser negativas.");
+                existenciasTexto.requestFocusInWindow();
+                return null;
+            }
+        } catch (NumberFormatException e) {
+            mostrarMensaje("Existencias debe ser un valor entero válido.");
+            existenciasTexto.requestFocusInWindow();
+            return null;
+        }
+
+        // Verificar Duplicados
+        var libros = libroServicio.listarLibros();
+        boolean existe = libros.stream()
+                .anyMatch(l ->
+                        l.getNombreLibro().equalsIgnoreCase(nombreLibro) &&
+                                l.getAutor().equalsIgnoreCase(autor) &&
+                                (idActual == null || !idActual.equals(l.getIdLibro()))
+                );
+        if (existe) {
+            mostrarMensaje("Ya existe un libro con ese nombre.");
+            return null;
+        }
+
+        return new Libro(idActual, nombreLibro, autor, precio, existencias);
+    }
+
 }
