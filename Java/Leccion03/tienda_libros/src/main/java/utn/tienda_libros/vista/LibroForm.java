@@ -55,7 +55,10 @@ public class LibroForm extends JFrame {
 
     private void agregarLibro() {
         Libro libro = validarFormulario(null);
-        if (libro == null) return;
+        if (libro == null){
+            limpiarFormulario();
+            return;
+        }
 
         try {
             libroServicio.guardarLibro(libro);
