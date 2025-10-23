@@ -56,7 +56,7 @@ public class LibroForm extends JFrame {
     private void agregarLibro() {
         Libro libro = validarFormulario(null);
         if (libro == null){
-            limpiarFormulario();
+//            limpiarFormulario();
             return;
         }
 
