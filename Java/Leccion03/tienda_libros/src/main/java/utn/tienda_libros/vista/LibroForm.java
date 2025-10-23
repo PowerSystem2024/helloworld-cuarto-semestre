@@ -6,6 +6,7 @@ import utn.tienda_libros.modelo.Libro;
 import utn.tienda_libros.servicio.LibroServicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import utn.tienda_libros.servicio.ServicioException;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -56,11 +57,58 @@ public class LibroForm extends JFrame {
         Libro libro = validarFormulario(null);
         if (libro == null) return;
 
-        libroServicio.guardarLibro(libro);
-        mostrarMensaje("El libro ha sido agregado.");
-        limpiarFormulario();
-        listarLibros();
+        try {
+            libroServicio.guardarLibro(libro);
+            mostrarMensaje("El libro ha sido agregado.");
+            limpiarFormulario();
+            listarLibros();
+        } catch (ServicioException e) {
+            mostrarMensaje(e.getMessage());
+        }
     }
+
+    private void modificarLibro() {
+        var renglon = tablaLibros.getSelectedRow();
+        if (idTexto.getText().isEmpty() || renglon == -1) {
+            mostrarMensaje("Se debe seleccionar un registro en la tabla.");
+            return;
+        }
+
+        int idLibro = Integer.parseInt(idTexto.getText());
+        Libro libro = validarFormulario(idLibro);
+        if (libro == null) return;
+
+        try {
+            libroServicio.guardarLibro(libro);
+            mostrarMensaje("El libro ha sido modificado.");
+            limpiarFormulario();
+            listarLibros();
+        } catch (ServicioException e) {
+            mostrarMensaje(e.getMessage());
+        }
+    }
+
+    private void eliminarLibro() {
+        var renglon = tablaLibros.getSelectedRow();
+        if (renglon == -1){
+            mostrarMensaje("No se ha seleccionado ningún libro de la tabla a eliminar.");
+            return;
+        }
+
+        String idLibro = tablaLibros.getModel().getValueAt(renglon, 0).toString();
+        var libro = new Libro();
+        libro.setIdLibro(Integer.parseInt(idLibro));
+
+        try {
+            libroServicio.eliminarLibro(libro);
+            mostrarMensaje("El libro " + idLibro + " ha sido eliminado");
+            limpiarFormulario();
+            listarLibros();
+        } catch (ServicioException e) {
+            mostrarMensaje(e.getMessage());
+        }
+    }
+
 
 
     private void cargarLibroSeleccionado(){
@@ -95,44 +143,8 @@ public class LibroForm extends JFrame {
         JOptionPane.showMessageDialog(this, mensaje);
     }
 
-    private void modificarLibro() {
-        if (idTexto.getText().isEmpty()) {
-            mostrarMensaje("Se debe seleccionar un registro en la tabla.");
-            return;
-        }
-
-        int idLibro = Integer.parseInt(idTexto.getText());
-        Libro libro = validarFormulario(idLibro);
-        if (libro == null) return;
-
-        libroServicio.guardarLibro(libro);
-        mostrarMensaje("El libro ha sido modificado.");
-        limpiarFormulario();
-        listarLibros();
+    private void createUIComponents(){
     }
-
-
-
-    private void eliminarLibro(){
-        var renglon = tablaLibros.getSelectedRow();
-        if (renglon != -1){
-            String idLibro =
-                    tablaLibros.getModel().getValueAt(renglon, 0).toString();
-            var libro = new Libro();
-            libro.setIdLibro(Integer.parseInt(idLibro));
-            libroServicio.eliminarLibro(libro);
-            mostrarMensaje("El libro " + idLibro + " ha sido eliminado");
-            limpiarFormulario();
-            listarLibros();
-        }
-        else {
-            mostrarMensaje("No se ha seleccionado ningún libro de la tabla a eliminar.");
-        }
-    }
-
-    // private void createUIComponents(){
-    //
-    //}
 
     private void iniciarForma() {
         // ===== Look and Feel moderno =====
