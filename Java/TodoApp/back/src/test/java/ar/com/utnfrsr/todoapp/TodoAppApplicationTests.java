@@ -1,4 +1,4 @@
-package at.com.utnfrsr.TodoApp;
+package ar.com.utnfrsr.todoapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

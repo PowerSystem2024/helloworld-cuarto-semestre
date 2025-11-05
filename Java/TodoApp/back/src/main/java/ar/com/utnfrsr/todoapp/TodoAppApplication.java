@@ -1,4 +1,4 @@
-package at.com.utnfrsr.TodoApp;
+package ar.com.utnfrsr.todoapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
