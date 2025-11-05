@@ -5,9 +5,9 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent
-        </artifactId><!--el proyecto raiz de donde nacen todas las demas aplicaciones-->
+        </artifactId>
         <version>3.0.2</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>ar.com.utnfrsr</groupId>
     <artifactId>todoapp</artifactId>
